@@ -1,0 +1,231 @@
+/* ================= BASE ================= */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #ffffff;
+  color: #111 !important;
+  line-height: 1.6;
+}
+
+
+/* ================= BRAND (Top Left) ================= */
+.brand-pink {
+  font-size: 1.8rem;          /* Bigger than before */
+  color: #ff3d9a !important;  /* Your accent pink */
+  letter-spacing: 0.5px;
+}
+
+.brand-pink:hover {
+  opacity: 0.8;
+  color: #ff3d9a !important;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  position: relative; /* needed for ::after underline */
+}
+
+/* Pink line UNDER the heading */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 4px;
+  background: #ff3d9a; /* accent pink */
+  border-radius: 2px;
+  margin-top: .75rem;  /* spacing under the text */
+}
+
+.section-kicker {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* ================= LINKS & BUTTONS ================= */
+
+.btn-accent {
+  background: #111;
+  color: #fff;
+  border: none;
+}
+
+.btn-accent:hover {
+  background: #333;
+  color: #fff;
+}
+
+.btn-outline-accent {
+  color: #ff3d9a;             /* harmonise with accent */
+  border: 1px solid #ff3d9a;
+  background: transparent;
+}
+
+.btn-outline-accent:hover {
+  color: #fff;
+  background: #ff3d9a;
+  border-color: #ff3d9a;
+}
+
+.link-accent {
+  color: #111;
+  text-decoration: underline;
+}
+
+.link-accent:hover {
+  opacity: 0.7;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar .nav-link {
+  color: #111;
+}
+
+.navbar .nav-link:hover {
+  opacity: 0.7;
+}
+
+/* ================= CARDS ================= */
+
+.card-soft {
+  border: 1px solid #eee;
+  transition: 0.25s ease;
+}
+
+.card-soft:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+/* Light‑pink variant ONLY in the Strategy & Project Management section */
+.section-strategy .card-soft {
+  border: 1px solid #ffd1e6;     /* light pink border */
+  background: #fff7fb;           /* very light pink background */
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.section-strategy .card-soft:hover {
+  background: #fff0f7;           /* slightly deeper tint on hover */
+}
+
+/* ================= PILLARS ================= */
+
+.pillar-card {
+  transition: 0.25s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-3px);
+  background: #fafafa;
+}
+
+.pillar-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* ================= TYPOGRAPHY CLOUD ================= */
+
+.how-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  margin-top: 1rem;
+}
+
+.how-cloud li {
+  opacity: 0.9;
+}
+
+.t-lg { font-size: 1.6rem; font-weight: 600; }
+.t-md { font-size: 1.15rem; }
+.t-sm { font-size: 0.9rem; }
+
+.r0 { transform: rotate(0deg); }
+.r1 { transform: rotate(-2deg); }
+.r2 { transform: rotate(2deg); }
+
+/* ================= CANVA EMBED FIX ================= */
+
+.canva-embed-wrapper {
+  max-width: 900px;
+  margin: 20px auto;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.canva-embed-wrapper iframe {
+  width: 100%;
+  height: 520px;
+  border: none;
+}
+
+/* mobile Canva */
+@media (max-width: 768px) {
+  .canva-embed-wrapper iframe {
+    height: 420px;
+  }
+}
+
+iframe {
+  max-width: 100%;
+  display: block;
+}
+
+/* ================= CAROUSEL ================= */
+
+.carousel-inner img {
+  height: 420px;
+  object-fit: cover;
+}
+
+/* ================= ABOUT ================= */
+
+.about-photo {
+  max-height: 420px;
+  object-fit: cover;
+}
+
+/* ================= TOOL LOGOS ================= */
+
+.tool-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.tool-logos img {
+  height: 34px;
+  opacity: 0.85;
+  transition: 0.2s;
+}
+
+.tool-logos img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* ================= SECTION OFFSET (sticky navbar fix) ================= */
+
+section {
+  scroll-margin-top: 80px;
+}
+
+/* ================= MOBILE POLISH ================= */
+
+@media (max-width: 768px) {
+  .display-6 {
+    font-size: 1.6rem;
+  }
+
+  .tool-logos {
+    justify-content: center;
+  }
+}
