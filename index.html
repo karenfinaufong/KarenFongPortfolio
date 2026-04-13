@@ -215,38 +215,33 @@
   <hr class="m-0">
 
  
-/* Design & Reels A4 Carousel */
-.design-carousel {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 1rem;
-}
+<!-- ================= DESIGN ================= -->
+<section id="design" class="py-5">
+  <div class="container">
 
-.carousel-track {
-  display: flex;
-  gap: 1.5rem;
-}
+    <h2 class="fw-bold section-title">Design</h2>
 
-/* A4-style portrait cards */
-.carousel-track img {
-  scroll-snap-align: center;
-  flex-shrink: 0;
-  width: 320px;          /* Ideal for A4 preview */
-  max-width: 85vw;
-  height: auto;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-}
+    <p class="text-muted mb-4">
+      A selection of design work including campaigns, presentations,
+      menus, event graphics and social assets.
+    </p>
 
-/* Larger preview on desktop */
-@media (min-width: 992px) {
-  .carousel-track img {
-    width: 380px;
-  }
-}
+    <!-- Design Carousel -->
+    <div class="design-carousel">
+      <div class="carousel-track">
+        <img src="images/design-1.jpg" alt="Design 1">
+        <img src="images/design-2.jpg" alt="Design 2">
+        <img src="images/design-3.jpg" alt="Design 3">
+        <img src="images/design-4.jpg" alt="Design 4">
+        <img src="images/design-5.jpg" alt="Design 5">
+        <img src="images/design-6.jpg" alt="Design 6">
+      </div>
+    </div>
 
+  </div>
+</section>
+
+<hr class="m-0">
 
   <!-- ================= ABOUT ================= -->
   <section id="about" class="py-5">
