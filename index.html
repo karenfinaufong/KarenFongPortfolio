@@ -215,51 +215,37 @@
   <hr class="m-0">
 
  
-<!-- ================= DESIGN & REELS ================= -->
-<section id="design" class="py-5">
-  <div class="container">
+/* Design & Reels A4 Carousel */
+.design-carousel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+}
 
-    <h2 class="fw-bold section-title">Design &amp; Reels</h2>
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+}
 
-    <p class="text-muted">
-      A small sampling of recent design work—social tiles, reels, campaign assets,
-      presentations, menus and event graphics.
-    </p>
+/* A4-style portrait cards */
+.carousel-track img {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  width: 320px;          /* Ideal for A4 preview */
+  max-width: 85vw;
+  height: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
 
-    <!-- Canva HTML Embed -->
-    <div style="
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-top: 141.4286%;
-      box-shadow: 0 2px 8px rgba(63,69,81,0.16);
-      margin-top: 1.6em;
-      margin-bottom: 0.9em;
-      overflow: hidden;
-      border-radius: 8px;
-      will-change: transform;
-    ">
-      <iframe
-        loading="lazy"
-        style="position:absolute;width:100%;height:100%;top:0;left:0;border:none;padding:0;margin:0;"
-        src="https://www.canva.com/design/DAHGsb1ad54/6HLaFqSKzQzUiGP19srdnw/view?embed"
-        allowfullscreen="allowfullscreen"
-        allow="fullscreen">
-      </iframe>
-    </div>
-
-    <p style="margin-top:0.75rem;">
-      <a href="https://www.canva.com/design/DAHGsb1ad54/6HLaFqSKzQzUiGP19srdnw/view"
-         target="_blank"
-         rel="noopener">
-        View full design folio on Canva
-      </a>
-    </p>
-
-  </div>
-</section>
-
-<hr class="m-0">
+/* Larger preview on desktop */
+@media (min-width: 992px) {
+  .carousel-track img {
+    width: 380px;
+  }
+}
 
 
   <!-- ================= ABOUT ================= -->
