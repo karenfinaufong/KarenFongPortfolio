@@ -229,3 +229,35 @@ section {
     justify-content: center;
   }
 }
+
+/* Design & Reels A4 Carousel */
+.design-carousel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* A4-style portrait cards */
+.carousel-track img {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  width: 320px;          /* Ideal for A4 preview */
+  max-width: 85vw;
+  height: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* Larger preview on desktop */
+@media (min-width: 992px) {
+  .carousel-track img {
+    width: 380px;
+  }
+}
