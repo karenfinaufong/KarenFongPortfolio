@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Fong — Résumé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2A38;
+    --ink-soft:#4A5A6A;
+    --paper:#F7F4EC;
+    --paper-line:#E4DCC9;
+    --brass:#B8863B;
+    --brass-dark:#8C6528;
+    --card:#FFFFFF;
+    --stamp-red:#9C3B2E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size: 100% 2.1em;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+  }
+  a{color:var(--brass-dark);}
+
+  .wrap{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    max-width:1080px;
+    margin:0 auto;
+    min-height:100vh;
+  }
+
+  /* ===== SIDEBAR / TAB INDEX ===== */
+  .sidebar{
+    position:sticky;
+    top:0;
+    height:100vh;
+    padding:2.4em 0 2.4em 0;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .id-block{
+    padding:0 1.6em 1.6em 1.6em;
+    border-bottom:2px solid var(--ink);
+  }
+  .id-block .name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.5rem;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+  .id-block .role{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    margin-top:0.5em;
+  }
+  .file-no{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    color:var(--brass-dark);
+    margin-top:0.9em;
+    letter-spacing:0.04em;
+  }
+
+  nav.tabs{
+    display:flex;
+    flex-direction:column;
+    margin-top:1.6em;
+  }
+  nav.tabs a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:0.75em 1.6em;
+    border-left:3px solid transparent;
+    transition:all .15s ease;
+  }
+  nav.tabs a:hover, nav.tabs a.active{
+    color:var(--ink);
+    border-left:3px solid var(--brass);
+    background:rgba(184,134,59,0.08);
+  }
+  nav.tabs a span.num{
+    color:var(--brass-dark);
+    margin-right:0.5em;
+  }
+
+  .sidebar-footer{
+    padding:0 1.6em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+  }
+  .sidebar-footer a{display:block; margin-top:0.3em;}
+
+  /* ===== MAIN CONTENT ===== */
+  main{
+    padding:2.4em 2.6em 4em 2.6em;
+    border-left:2px solid var(--ink);
+  }
+  section{
+    margin-bottom:3.4em;
+    scroll-margin-top:2em;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:0.8em;
+    margin-bottom:1.1em;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--brass-dark);
+    background:rgba(184,134,59,0.12);
+    padding:0.2em 0.55em;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.3rem;
+  }
+
+  .profile-text{
+    max-width:60ch;
+    color:var(--ink-soft);
+    font-size:0.98rem;
+  }
+  .profile-text strong{color:var(--ink); font-weight:600;}
+
+  .masthead{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:1em;
+    margin-bottom:2.6em;
+    padding-bottom:1.6em;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .masthead h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:2.6rem;
+    letter-spacing:-0.02em;
+  }
+  .masthead .tagline{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--brass-dark);
+    letter-spacing:0.04em;
+    margin-top:0.3em;
+  }
+  .contact-block{
+    text-align:right;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+  .contact-block a{color:var(--ink-soft); text-decoration:none;}
+  .contact-block a:hover{color:var(--brass-dark);}
+
+  /* ===== TIMELINE / ROLE CARDS ===== */
+  .entry{
+    position:relative;
+    padding-left:1.6em;
+    border-left:2px solid var(--paper-line);
+    padding-bottom:1.9em;
+  }
+  .entry:last-child{padding-bottom:0;}
+  .entry::before{
+    content:"";
+    position:absolute;
+    left:-7px;
+    top:0.3em;
+    width:12px;
+    height:12px;
+    background:var(--paper);
+    border:2px solid var(--brass);
+    border-radius:50%;
+  }
+  .entry-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:0.4em 1em;
+  }
+  .entry-title{
+    font-weight:600;
+    font-size:1.03rem;
+  }
+  .stamp{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--stamp-red);
+    border:1.5px solid var(--stamp-red);
+    border-radius:3px;
+    padding:0.15em 0.55em;
+    letter-spacing:0.04em;
+    transform:rotate(-1.5deg);
+    white-space:nowrap;
+  }
+  .entry-org{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin-top:0.15em;
+  }
+  .entry ul{
+    margin-top:0.7em;
+    padding-left:1.1em;
+    color:var(--ink-soft);
+    font-size:0.92rem;
+  }
+  .entry ul li{margin-bottom:0.4em;}
+  .entry ul li::marker{color:var(--brass);}
+
+  /* ===== SKILLS ===== */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:1.4em;
+  }
+  .skill-group h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    color:var(--brass-dark);
+    margin-bottom:0.7em;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:0.5em;}
+  .chip{
+    background:var(--card);
+    border:1px solid var(--paper-line);
+    padding:0.35em 0.75em;
+    font-size:0.82rem;
+    border-radius:4px;
+  }
+
+  /* ===== EDUCATION / CERTS ===== */
+  .cert-row{
+    display:flex;
+    justify-content:space-between;
+    padding:0.65em 0;
+    border-bottom:1px dashed var(--paper-line);
+    font-size:0.92rem;
+    gap:1em;
+    flex-wrap:wrap;
+  }
+  .cert-row .what{font-weight:500;}
+  .cert-row .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+
+  /* ===== REFERENCES ===== */
+  .ref-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:1.2em;
+  }
+  .ref-card{
+    background:var(--card);
+    border:1px solid var(--paper-line);
+    border-left:3px solid var(--brass);
+    padding:1em 1.2em;
+    font-size:0.88rem;
+  }
+  .ref-card .rname{font-weight:600;}
+  .ref-card .rrole{color:var(--ink-soft); font-size:0.82rem; margin-bottom:0.4em;}
+
+  footer.print-note{
+    margin-top:2em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:760px){
+    .wrap{grid-template-columns:1fr;}
+    .sidebar{
+      position:relative;
+      height:auto;
+      flex-direction:row;
+      align-items:center;
+      padding:1.2em;
+      gap:1em;
+    }
+    .id-block{border-bottom:none; padding:0;}
+    nav.tabs{flex-direction:row; margin-top:0; overflow-x:auto;}
+    nav.tabs a{border-left:none; border-bottom:3px solid transparent; padding:0.6em 0.8em;}
+    nav.tabs a:hover, nav.tabs a.active{border-left:none; border-bottom:3px solid var(--brass);}
+    .sidebar-footer{display:none;}
+    main{border-left:none; padding:1.6em 1.4em 3em 1.4em;}
+    .masthead h1{font-size:1.9rem;}
+    .contact-block{text-align:left;}
+  }
+
+  @media print{
+    body{background:#fff;}
+    .sidebar{display:none;}
+    .wrap{grid-template-columns:1fr;}
+    main{border-left:none;}
+  }
+
+  :focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <aside class="sidebar">
+    <div>
+      <div class="id-block">
+        <div class="name">Karen<br>Fong</div>
+        <div class="role">Project Mgmt · Marketing · Admin</div>
+        <div class="file-no">FILE NO. 2026 / KF‑10YR</div>
+      </div>
+      <nav class="tabs" id="tabs">
+        <a href="#profile"><span class="num">01</span>Profile</a>
+        <a href="#experience"><span class="num">02</span>Experience</a>
+        <a href="#skills"><span class="num">03</span>Skills</a>
+        <a href="#education"><span class="num">04</span>Education</a>
+        <a href="#references"><span class="num">05</span>References</a>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <a href="mailto:karenaritafong007@gmail.com">karenaritafong007@gmail.com</a>
+      <a href="tel:0494074567">0494 074 567</a>
+      <a href="https://www.linkedin.com/in/fongkaren/" target="_blank" rel="noopener">linkedin.com/in/fongkaren</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <div class="masthead">
+      <div>
+        <h1>Karen Fong</h1>
+        <div class="tagline">STRATEGY · DETAIL · DELIVERY — ADELAIDE, SA</div>
+      </div>
+      <div class="contact-block">
+        Northgate, Adelaide SA 5085<br>
+        <a href="mailto:karenaritafong007@gmail.com">karenaritafong007@gmail.com</a><br>
+        <a href="tel:0494074567">0494 074 567</a>
+      </div>
+    </div>
+
+    <section id="profile">
+      <div class="section-head"><span class="tag">01</span><h2>Profile</h2></div>
+      <p class="profile-text">
+        Over <strong>ten years</strong> across project management, integrated marketing communications, event management
+        and creative direction. My edge is holding the detail and the big picture at once —
+        <strong>moving the right pieces to the right place at the right time.</strong> I've run client portfolios of up to
+        fifteen at a time, built process from scratch inside growing companies, and kept fast-moving teams — design, PR,
+        broadcast, sales — hitting deadlines without dropping quality.
+      </p>
+    </section>
+
+    <section id="experience">
+      <div class="section-head"><span class="tag">02</span><h2>Experience</h2></div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Marketing and Admin</div>
+          <div class="stamp">MAR 2026 — CURRENT</div>
+        </div>
+        <div class="entry-org">Your Adelaide Buyers Agent · Property and Investment</div>
+        <ul>
+          <li>Conduct property and suburb research — market trends, comparable sales, data analysis — to support CEO-level decisions</li>
+          <li>Own the full social content calendar for Facebook, from ideation through scheduling, using Canva, CapCut and Blaze AI</li>
+          <li>Prepare research summaries, marketing reports and general administration support to the CEO</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Marketing Manager</div>
+          <div class="stamp">JUL 2024 — DEC 2025</div>
+        </div>
+        <div class="entry-org">Elegant Media, Melbourne, Australia · Marketing, Research and Operations</div>
+        <ul>
+          <li>Planned, executed and optimised Google Ads across a diverse software and mobile app client portfolio with a global team</li>
+          <li>Authored Elegant Media's first internal marketing process document — workflows, ownership, accountability</li>
+          <li>Designed and launched the company's first CSR program, securing long-term support for The Smith Family</li>
+          <li>Supported award submissions behind Elegant Media's Monash Business Innovation Award</li>
+          <li>Provided marketing and admin support to subsidiary BAPS Cleaning, including direct support to its Director and GM</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Project Manager &amp; Marketing Specialist</div>
+          <div class="stamp">2018 — 2024</div>
+        </div>
+        <div class="entry-org">The Greenhouse Studio, Suva, Fiji Islands · Marketing, Graphic Design and Communications</div>
+        <ul>
+          <li>Sole point of contact for a portfolio of 4–15 clients at once — regional development partners and corporates</li>
+          <li>Liaised across team, partners and suppliers to keep every deliverable on time, on budget, on brief</li>
+          <li>From 2021, expanded to co-launch a second company, Greenhouse Coworking — recruiting, training, sourcing, and running the opening campaign</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Marketing and Events Manager</div>
+          <div class="stamp">2015 — 2018</div>
+        </div>
+        <div class="entry-org">The Greenhouse Studio, Suva, Fiji Islands</div>
+        <ul>
+          <li>Oversaw marketing and project coordinators across 20+ active design and website projects at once</li>
+          <li>Ran the events team end-to-end — proposal through delivery, budget, timelines, post-event evaluation</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Head of Sales &amp; Marketing</div>
+          <div class="stamp">JAN — JUN 2015</div>
+        </div>
+        <div class="entry-org">Kriz Signs and Kriz Corporation, Suva, Fiji Islands · Signage and Branding</div>
+        <ul>
+          <li>Built and executed strategic marketing and sales plans against corporate performance targets</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Manager, Advertising</div>
+          <div class="stamp">2012 — 2014</div>
+        </div>
+        <div class="entry-org">Oceanic Communications, Suva, Fiji Islands · Integrated Communications and Marketing Agency</div>
+        <ul>
+          <li>Owned agency-client relationships across commercial and non-commercial accounts, from strategy to delivery</li>
+          <li>Primary copywriter on campaigns; wrote scripts for TV/radio and managed end-to-end product launches</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Events and Promotions Officer</div>
+          <div class="stamp">2007 — 2011</div>
+        </div>
+        <div class="entry-org">Fiji Broadcasting Corporation, Suva, Fiji Islands · Radio and Television Broadcasting</div>
+        <ul>
+          <li>Ran text-promotion targets and sponsorship proposals across 6 FBC radio stations</li>
+          <li>Managed national events including the Hibiscus Festival, Mirchi All Stars, and Concert of Hope</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section id="skills">
+      <div class="section-head"><span class="tag">03</span><h2>Skills</h2></div>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>Strategy &amp; Delivery</h3>
+          <div class="chip-row">
+            <span class="chip">Project Portfolio Management</span>
+            <span class="chip">Digital &amp; Marketing Strategy</span>
+            <span class="chip">Office Management</span>
+            <span class="chip">Creative Writing</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools &amp; Systems</h3>
+          <div class="chip-row">
+            <span class="chip">Google Workspace / MS Office</span>
+            <span class="chip">Trello · Monday · Asana · Basecamp</span>
+            <span class="chip">Pipedrive · Ortto · Mailchimp</span>
+            <span class="chip">Canva · CapCut · Creatify</span>
+            <span class="chip">Blaze AI · Claude</span>
+            <span class="chip">HTML · MySQL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-head"><span class="tag">04</span><h2>Education &amp; Development</h2></div>
+      <div class="cert-row"><span class="what">Bachelor of Business Information Systems — Torrens University (6.81 GPA)</span><span class="when">2024 — In Progress</span></div>
+      <div class="cert-row"><span class="what">AWS Academy Graduate — Cloud Foundations</span><span class="when">Nov 2025</span></div>
+      <div class="cert-row"><span class="what">Winning Government Grants and Tenders — Monarch Institute</span><span class="when">May 2025</span></div>
+      <div class="cert-row"><span class="what">Marketing &amp; Communication Job Simulation — Forage / NSW Government</span><span class="when">Oct 2024</span></div>
+      <div class="cert-row"><span class="what">Leadership Fiji — Alumni &amp; Fellow</span><span class="when">2018 — Present</span></div>
+    </section>
+
+    <section id="references">
+      <div class="section-head"><span class="tag">05</span><h2>References</h2></div>
+      <div class="ref-grid">
+        <div class="ref-card">
+          <div class="rname">Anushka Bandara</div>
+          <div class="rrole">CEO, Elegant Media</div>
+          <a href="mailto:anushka@elegantmedia.com.au">anushka@elegantmedia.com.au</a><br>
+          <a href="tel:0430336461">0430 336 461</a>
+        </div>
+        <div class="ref-card">
+          <div class="rname">Maria Ronna Luna Pastorizo‑Sekiguchi</div>
+          <div class="rrole">Founder &amp; Director, Greenhouse</div>
+          <a href="mailto:ronna@greenhousefiji.com">ronna@greenhousefiji.com</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="print-note">FILE NO. 2026 / KF‑10YR — LAST UPDATED AUG 2026</footer>
+
+  </main>
+</div>
+
+<script>
+  // Highlight active tab on scroll
+  const sections = document.querySelectorAll('main section');
+  const tabLinks = document.querySelectorAll('#tabs a');
+  const onScroll = () => {
+    let current = sections[0].id;
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    tabLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  };
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>
