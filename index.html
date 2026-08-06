@@ -1,427 +1,720 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Karen Arita Finau Fong | Portfolio</title>
-  <meta name="description" content="Strategy & Project Management, Design & Reels, and Creative Writing — by Karen Arita Finau Fong.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Fong — Strategy · Design · Storytelling</title>
+<meta name="description" content="Strategy & Project Management, Design & Reels, and Creative Writing — by Karen Arita Finau Fong.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1822;
+    --navy-card:#1B2A38;
+    --navy-card-2:#20303F;
+    --ivory:#F3EFE6;
+    --slate:#93A7B6;
+    --slate-dim:#6C7F8D;
+    --brass:#C79A4B;
+    --brass-dim:#8C6528;
+    --hairline:rgba(243,239,230,0.10);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--ivory);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  a{color:var(--brass); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--brass); color:var(--navy);}
 
-  <!-- Social preview -->
-  <meta property="og:title" content="Karen Arita Finau Fong | Portfolio" />
-  <meta property="og:description" content="Strategy • Design • Storytelling" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="images/profile.png" />
+  .mono{font-family:'IBM Plex Mono', monospace;}
 
-  <!-- Bootstrap CSS (CDN) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  /* ===== SCRUBBER (signature nav) ===== */
+  #scrubber{
+    position:fixed;
+    right:0;
+    top:0;
+    height:100vh;
+    width:52px;
+    z-index:100;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .scrub-track{
+    position:relative;
+    width:2px;
+    height:60vh;
+    background:var(--hairline);
+  }
+  .scrub-fill{
+    position:absolute;
+    top:0; left:0;
+    width:2px;
+    height:0%;
+    background:var(--brass);
+    transition:height .1s linear;
+  }
+  .scrub-marks{
+    position:absolute;
+    top:0; left:0;
+    width:2px;
+    height:100%;
+  }
+  .scrub-mark{
+    position:absolute;
+    left:-4px;
+    width:10px;
+    height:2px;
+    background:var(--slate-dim);
+    transform:translateY(-50%);
+    pointer-events:auto;
+    cursor:pointer;
+  }
+  .scrub-mark.active{background:var(--brass); width:16px; left:-7px;}
+  .scrub-label{
+    position:absolute;
+    left:-92px;
+    width:80px;
+    text-align:right;
+    font-size:0.62rem;
+    letter-spacing:0.06em;
+    color:var(--slate-dim);
+    transform:translateY(-50%);
+    white-space:nowrap;
+  }
+  .scrub-mark.active + .scrub-label,
+  .scrub-label.active{color:var(--brass);}
+  @media (max-width:900px){ #scrubber{display:none;} }
 
-  <!-- Your CSS (load after Bootstrap) -->
-  <link href="styles.css?v=5" rel="stylesheet" />
+  /* ===== HERO ===== */
+  #hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:2em;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(199,154,75,0.09), transparent 60%),
+      var(--navy);
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.25em;
+    color:var(--brass);
+    margin-bottom:1.4em;
+    opacity:0;
+    animation:fadeUp .8s ease forwards .1s;
+  }
+  .hero-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    letter-spacing:-0.02em;
+    line-height:1.02;
+    opacity:0;
+    animation:fadeUp .9s ease forwards .3s;
+  }
+  .hero-sub{
+    margin-top:1.3em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    letter-spacing:0.1em;
+    color:var(--slate);
+    opacity:0;
+    animation:fadeUp .9s ease forwards .55s;
+  }
+  .hero-tag{
+    margin-top:2.6em;
+    max-width:46ch;
+    color:var(--slate);
+    font-size:1.02rem;
+    opacity:0;
+    animation:fadeUp .9s ease forwards .75s;
+  }
+  .hero-scroll{
+    position:absolute;
+    bottom:2.4em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.12em;
+    color:var(--slate-dim);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.6em;
+    opacity:0;
+    animation:fadeUp .9s ease forwards 1.1s;
+  }
+  .hero-scroll .bar{width:1px; height:34px; background:var(--slate-dim); overflow:hidden; position:relative;}
+  .hero-scroll .bar::after{
+    content:""; position:absolute; top:-100%; left:0; width:100%; height:100%;
+    background:var(--brass);
+    animation:runBar 1.6s ease-in-out infinite;
+  }
+  @keyframes runBar{ 0%{top:-100%;} 100%{top:100%;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ===== SHELL ===== */
+  main{max-width:980px; margin:0 auto; padding:0 1.8em;}
+  section{padding:7em 0; border-top:1px solid var(--hairline);}
+  #hero{border-top:none;}
+
+  .act-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    color:var(--brass);
+    margin-bottom:0.8em;
+  }
+  .act-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing:-0.01em;
+    margin-bottom:0.5em;
+  }
+  .act-desc{
+    color:var(--slate);
+    max-width:60ch;
+    margin-bottom:2.6em;
+  }
+
+  /* ===== FILMSTRIP (Act I — Strategy) ===== */
+  .filmstrip{
+    display:flex;
+    gap:1.4em;
+    overflow-x:auto;
+    padding:0.6em 0.2em 1.4em 0.2em;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+  }
+  .filmstrip::-webkit-scrollbar{height:6px;}
+  .filmstrip::-webkit-scrollbar-thumb{background:var(--hairline); border-radius:3px;}
+  .frame{
+    scroll-snap-align:start;
+    flex:0 0 300px;
+    background:var(--navy-card);
+    border:1px solid var(--hairline);
+    border-radius:4px;
+    position:relative;
+    padding:1.5em 1.4em 1.4em 1.4em;
+  }
+  .frame::before, .frame::after{
+    content:"";
+    position:absolute;
+    left:0; right:0;
+    height:10px;
+    background-image:repeating-linear-gradient(90deg, var(--navy) 0 6px, transparent 6px 14px);
+    background-color: var(--navy);
+  }
+  .frame::before{top:-1px; border-top-left-radius:4px; border-top-right-radius:4px;}
+  .frame::after{bottom:-1px; border-bottom-left-radius:4px; border-bottom-right-radius:4px;}
+  .frame-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--brass);
+    letter-spacing:0.05em;
+    margin-bottom:0.7em;
+  }
+  .frame h3{font-size:1rem; font-weight:600; margin-bottom:0.15em;}
+  .frame .org{font-size:0.82rem; color:var(--slate); font-style:italic; margin-bottom:0.9em;}
+  .frame ul{padding-left:1.1em; font-size:0.85rem; color:var(--slate);}
+  .frame ul li{margin-bottom:0.5em;}
+  .frame ul li::marker{color:var(--brass);}
+  .filmstrip-hint{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    color:var(--slate-dim);
+    letter-spacing:0.08em;
+    margin-top:0.6em;
+  }
+
+  /* ===== CONTACT SHEET (Act II — Design) ===== */
+  .contact-sheet{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0.9em;
+  }
+  .neg{
+    position:relative;
+    border:1px solid var(--hairline);
+    background:var(--navy-card);
+    padding:0.5em;
+    border-radius:2px;
+  }
+  .neg img{border-radius:1px; aspect-ratio:1/1; object-fit:cover;}
+  .neg .frame-no{
+    position:absolute; top:0.3em; left:0.5em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.6rem;
+    color:var(--brass);
+    background:var(--navy-card);
+    padding:0 0.3em;
+  }
+  @media (max-width:700px){ .contact-sheet{grid-template-columns:repeat(2,1fr);} }
+
+  /* ===== SCRIPT PAGE (Act III — Writing) ===== */
+  .script-page{
+    background:var(--navy-card);
+    border:1px solid var(--hairline);
+    border-radius:4px;
+    padding:2.6em 2.4em;
+    position:relative;
+  }
+  .script-page .slug{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--brass);
+    letter-spacing:0.1em;
+    margin-bottom:1.4em;
+  }
+  .script-page p{
+    font-family:'Fraunces', serif;
+    font-size:1.25rem;
+    font-style:italic;
+    line-height:1.55;
+    color:var(--ivory);
+    max-width:56ch;
+  }
+  .script-page .byline{
+    margin-top:1.6em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    color:var(--slate);
+  }
+
+  /* ===== ABOUT (cast card) ===== */
+  .cast-card{
+    display:flex;
+    gap:2.2em;
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+  .cast-photo{
+    width:150px; height:150px;
+    border-radius:4px;
+    object-fit:cover;
+    border:1px solid var(--hairline);
+    flex-shrink:0;
+  }
+  .cast-body{flex:1; min-width:260px;}
+  .cast-name{font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600; margin-bottom:0.2em;}
+  .cast-role{font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--brass); letter-spacing:0.08em; margin-bottom:1em;}
+  .cast-bio{color:var(--slate); max-width:58ch;}
+  .cast-links{margin-top:1.2em; display:flex; gap:1.4em; font-size:0.85rem;}
+
+  /* ===== PRODUCTION NOTES (skills/certs) ===== */
+  .notes-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:2em;
+  }
+  .notes-col h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    color:var(--brass);
+    margin-bottom:0.9em;
+    text-transform:uppercase;
+  }
+  .notes-col ul{list-style:none;}
+  .notes-col li{
+    padding:0.5em 0;
+    border-bottom:1px dashed var(--hairline);
+    font-size:0.88rem;
+    color:var(--ivory);
+    display:flex;
+    justify-content:space-between;
+    gap:1em;
+  }
+  .notes-col li span.date{color:var(--slate-dim); font-family:'IBM Plex Mono', monospace; font-size:0.7rem; white-space:nowrap;}
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:0.55em; margin-top:0.4em;}
+  .chip{
+    background:var(--navy-card);
+    border:1px solid var(--hairline);
+    padding:0.4em 0.85em;
+    font-size:0.8rem;
+    border-radius:3px;
+    color:var(--ivory);
+  }
+
+  /* ===== EQUIPMENT (tools) ===== */
+  .equip-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(90px,1fr));
+    gap:1em;
+  }
+  .equip-item{
+    background:var(--navy-card);
+    border:1px solid var(--hairline);
+    border-radius:4px;
+    padding:1em 0.6em;
+    text-align:center;
+    font-size:0.72rem;
+    color:var(--slate);
+  }
+  .equip-item img{height:26px; width:auto; margin:0 auto 0.6em auto; opacity:0.9;}
+
+  /* ===== END CREDITS (footer/contact) ===== */
+  #credits{
+    text-align:center;
+    padding-bottom:8em;
+  }
+  #credits .roll-title{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    font-weight:600;
+    margin-bottom:0.6em;
+  }
+  #credits .roll-sub{color:var(--slate); margin-bottom:2.4em;}
+  .credit-links{
+    display:flex;
+    justify-content:center;
+    gap:2.4em;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    margin-bottom:3em;
+  }
+  .fin{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color:var(--slate-dim);
+    margin-top:2.4em;
+  }
+  .copyright{
+    margin-top:3em;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    color:var(--slate-dim);
+    letter-spacing:0.05em;
+  }
+
+  /* ===== TOPBAR ===== */
+  #topbar{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:90;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.1em 1.8em;
+    background:linear-gradient(var(--navy) 60%, transparent);
+    pointer-events:none;
+  }
+  #topbar .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    color:var(--ivory);
+    pointer-events:auto;
+  }
+  #topbar a.resume-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    border:1px solid var(--brass);
+    color:var(--brass);
+    padding:0.5em 1em;
+    border-radius:3px;
+    pointer-events:auto;
+  }
+  #topbar a.resume-link:hover{background:var(--brass); color:var(--navy); text-decoration:none;}
+
+  ::-moz-selection{background:var(--brass); color:var(--navy);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .hero-eyebrow, .hero-title, .hero-sub, .hero-tag, .hero-scroll{opacity:1 !important; transform:none !important;}
+    .reveal{opacity:1 !important; transform:none !important;}
+  }
+
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  @media (max-width:600px){
+    section{padding:4.5em 0;}
+    .cast-card{flex-direction:column;}
+    .filmstrip .frame{flex-basis:82vw;}
+  }
+</style>
 </head>
-<body id="top" class="text-dark">
+<body>
 
-  <!-- ================= NAVBAR ================= -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold brand-pink" href="#top">KAREN FONG</a>
+<div id="topbar">
+  <span class="brand">KAREN FONG</span>
+  <a class="resume-link" href="karen-fong-resume.html">RÉSUMÉ →</a>
+</div>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"
-              aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav id="scrubber" aria-label="Section progress">
+  <div class="scrub-track">
+    <div class="scrub-fill" id="scrubFill"></div>
+    <div class="scrub-marks" id="scrubMarks"></div>
+  </div>
+</nav>
 
-      <div id="nav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="#work">My Work</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#certs">Certifications</a></li>
-          <li class="nav-item"><a class="nav-link" href="#tools">Tools &amp; Systems</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item ms-lg-2">
-            <a class="btn btn-accent btn-sm" href="assets/Karen_Fong_Resume2026.pdf" target="_blank" rel="noopener">Résumé</a>
-          </li>
+<header id="hero">
+  <div class="hero-eyebrow mono">A CAREER IN THREE ACTS</div>
+  <h1 class="hero-title">Karen Fong</h1>
+  <div class="hero-sub mono">STRATEGY · DESIGN · STORYTELLING</div>
+  <p class="hero-tag">Equal parts strategist, creative, and storyteller — ten years of moving the right pieces to the right place at the right time.</p>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="bar"></div>
+  </div>
+</header>
+
+<main>
+
+  <section id="act1" data-act="Act I — Strategy">
+    <div class="act-eyebrow reveal">ACT I</div>
+    <h2 class="act-title reveal">Strategy &amp; Project Management</h2>
+    <p class="act-desc reveal">Campaign coordination, project scheduling, social &amp; content planning, creative briefing, stakeholder management, PR &amp; media, and performance reporting.</p>
+
+    <div class="filmstrip reveal">
+      <div class="frame">
+        <div class="frame-time">2024 — 2025</div>
+        <h3>Google Ads &amp; Marketing Analytics</h3>
+        <div class="org">Software &amp; app development, Melbourne</div>
+        <ul>
+          <li>Led Google Ads strategy &amp; reporting across verticals</li>
+          <li>Quarterly strategy &amp; visibility frameworks for leadership</li>
+          <li>Authored internal "Company Process Document"</li>
+        </ul>
+      </div>
+      <div class="frame">
+        <div class="frame-time">2023</div>
+        <h3>Pacific Skills Summit</h3>
+        <div class="org">Event &amp; Logistics · APTC</div>
+        <ul>
+          <li>Registrations (Whova), logistics &amp; comms schedules</li>
+          <li>PR/media schedule, scripts, press engagement</li>
+          <li>Post-event reporting — qual &amp; quant media metrics</li>
+        </ul>
+      </div>
+      <div class="frame">
+        <div class="frame-time">2021</div>
+        <h3>Regional Social Strategy</h3>
+        <div class="org">Insurance organisation · 8 countries</div>
+        <ul>
+          <li>Multi-country social strategy &amp; content calendar</li>
+          <li>Creative briefs, coordination across 8 stakeholders</li>
+          <li>Monthly reporting — reach, engagement, ROI</li>
+        </ul>
+      </div>
+      <div class="frame">
+        <div class="frame-time">2021</div>
+        <h3>World Bank Pacific Podcast</h3>
+        <div class="org">Content &amp; PR · Season 2</div>
+        <ul>
+          <li>Planned cross-channel content for 10 episodes</li>
+          <li>Partnered with host, producer &amp; comms team</li>
+          <li>Episode performance reports &amp; refinement</li>
+        </ul>
+      </div>
+      <div class="frame">
+        <div class="frame-time">2021</div>
+        <h3>National Airline Campaign</h3>
+        <div class="org">Production Fixer</div>
+        <ul>
+          <li>On-ground production logistics &amp; contractor liaison</li>
+          <li>Talent sourcing, scheduling, call sheets &amp; runsheets</li>
+          <li>Ensured assets captured on schedule to creative brief</li>
         </ul>
       </div>
     </div>
-  </nav>
-
-  <!-- ================= HERO ================= -->
-  <header class="py-5">
-    <div class="container">
-      <p class="section-kicker mb-2">STRATEGY • DESIGN • STORYTELLING</p>
-      <h1 class="display-6 fw-bold lh-sm mb-0">Equal parts strategist, creative, and storyteller.</h1>
-    </div>
-  </header>
-
-  <hr class="m-0">
-
-  <!-- ================= HOW I WORK (TYPOGRAPHY CLOUD) ================= -->
-  <section id="how" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">How I Work</h2>
-      <!-- Organic typography cloud -->
-      <ul class="how-cloud list-unstyled mb-0">
-        <li class="t-lg r2">big‑picture thinker</li>
-        <li class="t-md r1">detail‑oriented</li>
-        <li class="t-sm r0">systems</li>
-        <li class="t-md r1">organiser</li>
-        <li class="t-sm r2">calm under pressure</li>
-        <li class="t-md r0">creative</li>
-        <li class="t-sm r1">storyteller</li>
-        <li class="t-md r2">curious</li>
-        <li class="t-sm r0">planner</li>
-        <li class="t-md r1">problem‑solver</li>
-        <li class="t-sm r2">strategist</li>
-        <li class="t-md r0">agile</li>
-      </ul>
-    </div>
+    <div class="filmstrip-hint reveal">← SCROLL FOR MORE FRAMES →</div>
   </section>
 
-  <hr class="m-0">
+  <section id="act2" data-act="Act II — Design">
+    <div class="act-eyebrow reveal">ACT II</div>
+    <h2 class="act-title reveal">Design &amp; Reels</h2>
+    <p class="act-desc reveal">A selection of design work — campaigns, presentations, menus, event graphics and social assets.</p>
 
-  <!-- ================= MY WORK INTRO (3 PILLARS) ================= -->
-  <section id="work-intro" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">My Work &amp; Capabilities</h2>
-      <p class="text-muted">The three pillars of my work: <strong>strategy</strong>, <strong>design</strong>, and <strong>storytelling</strong>.</p>
+    <div class="contact-sheet reveal">
+      <div class="neg"><span class="frame-no mono">01</span><img src="https://karenfinaufong.github.io/KarenFongPortfolio/images/design-1.jpg" alt="Design work sample 1" loading="lazy"></div>
+      <div class="neg"><span class="frame-no mono">02</span><img src="https://karenfinaufong.github.io/KarenFongPortfolio/images/design-2.jpg" alt="Design work sample 2" loading="lazy"></div>
+      <div class="neg"><span class="frame-no mono">03</span><img src="https://karenfinaufong.github.io/KarenFongPortfolio/images/design-3.jpg" alt="Design work sample 3" loading="lazy"></div>
+      <div class="neg"><span class="frame-no mono">04</span><img src="https://karenfinaufong.github.io/KarenFongPortfolio/images/design-4.jpg" alt="Design work sample 4" loading="lazy"></div>
+      <div class="neg"><span class="frame-no mono">05</span><img src="https://karenfinaufong.github.io/KarenFongPortfolio/images/design-5.jpg" alt="Design work sample 5" loading="lazy"></div>
+      <div class="neg"><span class="frame-no mono">06</span><img src="https://karenfinaufong.github.io/KarenFongPortfolio/images/design-6.jpg" alt="Design work sample 6" loading="lazy"></div>
+    </div>
+    <div class="filmstrip-hint reveal" style="margin-top:1.4em;"><a href="https://www.canva.com/design/DAHCelGiRPg/FYkhzzUcK_6Yq_7J51ercA/view" target="_blank" rel="noopener">VIEW FULL CANVA PORTFOLIO →</a></div>
+  </section>
 
-      <div class="row g-3 mt-3">
-        <!-- Pillar 1 -->
-        <div class="col-12 col-md-4">
-          <a class="pillar-card d-flex align-items-center p-3 rounded-3 text-decoration-none border" href="#work">
-            <img class="pillar-icon me-2" src="images/icon1.jpg" alt="Strategy icon">
-            <div>
-              <h5 class="m-0 text-dark">Strategy &amp; Project Management</h5>
-              <div class="text-muted small">Campaigns · PM · PR · Reporting</div>
-            </div>
-          </a>
-        </div>
-        <!-- Pillar 2 -->
-        <div class="col-12 col-md-4">
-          <a class="pillar-card d-flex align-items-center p-3 rounded-3 text-decoration-none border" href="#design">
-            <img class="pillar-icon me-2" src="images/icon2.jpg" alt="Design icon">
-            <div>
-              <h5 class="m-0 text-dark">Design &amp; Reels</h5>
-              <div class="text-muted small">Canva visuals · Short‑form edits</div>
-            </div>
-          </a>
-        </div>
-        <!-- Pillar 3 -->
-        <div class="col-12 col-md-4">
-          <a class="pillar-card d-flex align-items-center p-3 rounded-3 text-decoration-none border" href="#writing">
-            <img class="pillar-icon me-2" src="images/icon3.jpg" alt="Writing icon">
-            <div>
-              <h5 class="m-0 text-dark">Creative Writing</h5>
-              <div class="text-muted small">Blog · Reflection · Storytelling</div>
-            </div>
-          </a>
+  <section id="act3" data-act="Act III — Writing">
+    <div class="act-eyebrow reveal">ACT III</div>
+    <h2 class="act-title reveal">Creative Writing</h2>
+    <p class="act-desc reveal">Short, reflective pieces that help me process experiences, emotions, and moments of growth — small personal blogs exploring honesty, storytelling, and the everyday things that shape who I am.</p>
+
+    <div class="script-page reveal">
+      <div class="slug mono">INT. NOTEBOOK — NIGHT</div>
+      <p>"Some of the best strategy work starts as a messy paragraph in a notebook, long before it becomes a plan anyone else sees."</p>
+      <div class="byline mono">— FROM THE BLOG</div>
+    </div>
+    <div class="filmstrip-hint reveal" style="margin-top:1.2em;"><a href="https://beautifulmess82666898.wordpress.com/" target="_blank" rel="noopener">READ MY BLOGS →</a></div>
+  </section>
+
+  <section id="about" data-act="About">
+    <div class="act-eyebrow reveal">CAST</div>
+    <div class="cast-card reveal">
+      <img class="cast-photo" src="https://karenfinaufong.github.io/KarenFongPortfolio/images/profile.png" alt="Karen Fong">
+      <div class="cast-body">
+        <div class="cast-name">Karen Arita Finau Fong</div>
+        <div class="cast-role mono">MARKETING &amp; COMMUNICATIONS SPECIALIST</div>
+        <p class="cast-bio">Ten-plus years across project management, campaign coordination, events, advertising, digital strategy, creative briefing and content. My superpower is balancing creativity with structure — bringing ideas to life while keeping details tight, timelines realistic and strategy aligned. I have worked with development partners, corporates, tech, media and community organisations across Fiji, Australia and the Pacific.</p>
+        <div class="cast-links">
+          <a href="https://www.linkedin.com/in/fongkaren/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.canva.com/design/DAHCelGiRPg/FYkhzzUcK_6Yq_7J51ercA/view" target="_blank" rel="noopener">Canva Portfolio</a>
         </div>
       </div>
     </div>
   </section>
 
-  <hr class="m-0">
-
-  <!-- Anchor for "My Work" scroll -->
-  <section id="work" class="py-2"><div class="container"></div></section>
-
-  <!-- ================= STRATEGY & PROJECT MANAGEMENT ================= -->
-  <!-- Added class 'section-strategy' so we can style its cards with the light‑pink box -->
-  <section class="py-5 section-strategy">
-    <div class="container">
-      <h2 class="fw-bold section-title">Strategy &amp; Project Management</h2>
-      <p class="text-muted mb-4">Campaign coordination, project scheduling, social &amp; content planning, creative briefing, stakeholder management, PR &amp; media, and performance reporting.</p>
-
-      <div class="row g-4">
-        <!-- 2024–2025 -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted mb-1">2024–2025 · Google Ads &amp; Marketing Analytics</h6>
-              <h5 class="card-title">Software &amp; app development (Melbourne)</h5>
-              <ul class="mb-0 text-muted small">
-                <li>Led Google Ads strategy &amp; reporting across verticals</li>
-                <li>Quarterly strategy &amp; visibility frameworks for leadership</li>
-                <li>Authored internal “Company Process Document” (workflows, approvals, comms)</li>
-              </ul>
-            </div>
-          </article>
+  <section id="notes" data-act="Notes">
+    <div class="act-eyebrow reveal">PRODUCTION NOTES</div>
+    <h2 class="act-title reveal">Skills &amp; Certifications</h2>
+    <div class="notes-grid reveal">
+      <div class="notes-col">
+        <h4>Core</h4>
+        <div class="chip-row">
+          <span class="chip">Marketing strategy &amp; content</span>
+          <span class="chip">Campaign coordination</span>
+          <span class="chip">Project management</span>
+          <span class="chip">Creative briefing</span>
+          <span class="chip">Stakeholder comms</span>
+          <span class="chip">PR &amp; media</span>
+          <span class="chip">Events</span>
+          <span class="chip">Reporting &amp; analytics</span>
+          <span class="chip">Admin &amp; operations</span>
         </div>
-
-        <!-- 2023 -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted mb-1">2023 · Event &amp; Logistics</h6>
-              <h5 class="card-title">Pacific Skills Summit (APTC) </h5>
-              <ul class="mb-0 text-muted small">
-                <li>Registrations (WHOVA), logistics, and comms schedules</li>
-                <li>PR/media schedule, scripts, press engagement</li>
-                <li>Post‑event reporting (qual &amp; quant media metrics)</li>
-              </ul>
-            </div>
-          </article>
+      </div>
+      <div class="notes-col">
+        <h4>Writing &amp; Content</h4>
+        <div class="chip-row">
+          <span class="chip">Storytelling &amp; tone of voice</span>
+          <span class="chip">Blog &amp; long-form</span>
+          <span class="chip">Short-form social</span>
+          <span class="chip">Light UX writing</span>
         </div>
-
-        <!-- 2021: Social Media Strategy -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted mb-1">2021 · Social Media Campaign Strategy</h6>
-              <h5 class="card-title">Regional insurance organisation (8 countries)</h5>
-              <ul class="mb-0 text-muted small">
-                <li>Multi‑country social strategy &amp; content calendar</li>
-                <li>Creative briefs; coordination across 8 stakeholders</li>
-                <li>Monthly reporting (reach, engagement, conversions, ROI)</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-
-        <!-- 2021: Content & PR -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted mb-1">2021 · Content &amp; PR</h6>
-              <h5 class="card-title"> World Bank Pacific podcast · Season 2</h5>
-              <ul class="mb-0 text-muted small">
-                <li>Planned cross‑channel content for 10 episodes</li>
-                <li>Partnered with host, producer &amp; comms team</li>
-                <li>Episode performance reports &amp; refinement</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-
-        <!-- 2021: Production Fixer -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted mb-1">2021 · Production Fixer</h6>
-              <h5 class="card-title">National airline campaign</h5>
-              <ul class="mb-0 text-muted small">
-                <li>On‑ground production logistics &amp; contractor liaison</li>
-                <li>Talent sourcing, scheduling, call sheets &amp; runsheets</li>
-                <li>Ensured assets captured on schedule to creative brief</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-
+      </div>
+      <div class="notes-col">
+        <h4>Certifications</h4>
+        <ul>
+          <li>AWS Academy — Cloud Foundations <span class="date">2025</span></li>
+          <li>Winning Govt Grants &amp; Tenders — Monarch <span class="date">2025</span></li>
+          <li>Marketing Job Simulation — Forage <span class="date">2024</span></li>
+          <li>BBIS — Torrens Uni (6.81 GPA) <span class="date">In progress</span></li>
+          <li>Leadership Fiji — Fellow &amp; Alumni <span class="date">2018–Present</span></li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <hr class="m-0">
-
- 
-<!-- ================= DESIGN ================= -->
-<section id="design" class="py-5">
-  <div class="container">
-
-    <h2 class="fw-bold section-title">Design</h2>
-
-    <p class="text-muted mb-4">
-      A selection of design work including campaigns, presentations,
-      menus, event graphics and social assets.
-    </p>
-
-    <!-- Design Carousel -->
-    <div class="design-carousel">
-      <div class="carousel-track">
-        <img src="images/design-1.jpg" alt="Design 1">
-        <img src="images/design-2.jpg" alt="Design 2">
-        <img src="images/design-3.jpg" alt="Design 3">
-        <img src="images/design-4.jpg" alt="Design 4">
-        <img src="images/design-5.jpg" alt="Design 5">
-        <img src="images/design-6.jpg" alt="Design 6">
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="m-0">
-
-  <!-- ================= ABOUT ================= -->
-  <section id="about" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">About</h2>
-      <div class="row g-4 align-items-center">
-        <div class="col-12 col-md-5">
-          <img class="img-fluid rounded-3 about-photo" src="images/profile.png" alt="Karen profile photo">
-        </div>
-        <div class="col-12 col-md-7">
-          <p class="lead text-muted">
-            I’m a marketing and communications specialist with 10+ years across project management, campaign coordination,
-            events, advertising, digital strategy, creative briefing and content. My superpower is balancing creativity with
-            structure, bringing ideas to life while keeping details tight, timelines realistic and strategy aligned. I’ve
-            worked with development partners, corporates, tech, media and community organisations across Fiji, Australia and
-            the Pacific.
-          </p>
-          <div class="d-flex flex-wrap gap-3">
-            <a class="link-accent" href="https://www.canva.com/design/DAHCelGiRPg/FYkhzzUcK_6Yq_7J51ercA/view" target="_blank" rel="noopener">Canva portfolio</a>
-            <a class="link-accent" href="https://www.linkedin.com/in/fongkaren/" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-        </div>
-      </div>
+  <section id="equipment" data-act="Tools">
+    <div class="act-eyebrow reveal">EQUIPMENT</div>
+    <h2 class="act-title reveal">Tools &amp; Systems</h2>
+    <p class="act-desc reveal">Platforms I use daily to plan, create, organise, analyse and deliver work efficiently.</p>
+    <div class="equip-grid reveal">
+      <div class="equip-item">Figma</div>
+      <div class="equip-item">HTML</div>
+      <div class="equip-item">Python</div>
+      <div class="equip-item">CapCut</div>
+      <div class="equip-item">Canva</div>
+      <div class="equip-item">Trello</div>
+      <div class="equip-item">Monday</div>
+      <div class="equip-item">Mailchimp</div>
+      <div class="equip-item">Ortto</div>
+      <div class="equip-item">Tableau</div>
+      <div class="equip-item">Google Workspace</div>
+      <div class="equip-item">Microsoft Office</div>
+      <div class="equip-item">Pipedrive</div>
     </div>
   </section>
 
-  <hr class="m-0">
-
-  <!-- ================= CREATIVE WRITING ================= -->
-  <section id="writing" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">Creative Writing</h2>
-      <p class="text-muted">
-        
- I enjoy creative writing, especially short, reflective pieces that help me process experiences, emotions, and moments of growth. 
-  These are small, personal blogs where I explore honesty, storytelling, and the everyday things that shape who I am.
-
-      </p>
-      <a class="btn btn-outline-accent" href="https://beautifulmess82666898.wordpress.com/?_gl=1*3dtsvp*_gcl_au*MTA4MzY2MjI5OC4xNzcxMzk3MDQ5" target="_blank" rel="noopener">My Blogs</a>
+  <section id="credits" data-act="Contact">
+    <div class="act-eyebrow reveal" style="text-align:center;">END CREDITS</div>
+    <div class="roll-title reveal">Let's connect</div>
+    <p class="roll-sub reveal">Open to opportunities across administration, marketing and project coordination.</p>
+    <div class="credit-links reveal">
+      <a href="mailto:karenaritafong007@gmail.com">karenaritafong007@gmail.com</a>
+      <a href="karen-fong-resume.html">Résumé</a>
+      <a href="https://www.linkedin.com/in/fongkaren/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
+    <div class="fin reveal">Fin.</div>
+    <div class="copyright reveal">© 2026 KAREN ARITA FINAU FONG</div>
   </section>
 
-  <hr class="m-0">
+</main>
 
-  <!-- ================= CERTIFICATIONS ================= -->
-  <section id="certs" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">Certifications &amp; Professional Development</h2>
-      <ul class="list-unstyled m-0">
-        <li class="mb-2">AWS Academy Graduate — Cloud Foundations (2025)</li>
-        <li class="mb-2">Winning Government Grants &amp; Tenders — Monarch Institute (2025)</li>
-        <li class="mb-2">NSW Government Marketing &amp; Communications Job Simulation — Forage (2024)</li>
-        <li class="mb-2">Bachelor of Business Information Systems — Torrens University <span class="text-muted">(in progress, GPA 6.81)</span></li>
-        <li class="mb-2">Leadership Fiji — Fellow &amp; Alumni (2018–Present)</li>
-      </ul>
-    </div>
-  </section>
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
 
-  <hr class="m-0">
+  // Scrubber
+  const sections = document.querySelectorAll('main section');
+  const scrubFill = document.getElementById('scrubFill');
+  const scrubMarks = document.getElementById('scrubMarks');
 
-  <!-- ================= SKILLS ================= -->
-  <section id="skills" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">Skills &amp; Strengths</h2>
-      <div class="row g-4">
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted">Core</h6>
-              <ul class="mb-0">
-                <li>Marketing strategy &amp; content</li>
-                <li>Campaign coordination</li>
-                <li>Project management &amp; scheduling</li>
-                <li>Creative briefing &amp; concepting</li>
-                <li>Stakeholder communication</li>
-                <li>PR &amp; media coordination</li>
-                <li>Events</li>
-                <li>Reporting &amp; analytics</li>
-                <li>Admin &amp; operations</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted">Writing &amp; Content</h6>
-              <ul class="mb-0">
-                <li>Storytelling &amp; tone of voice</li>
-                <li>Blog &amp; long‑form</li>
-                <li>Short‑form social &amp; captions</li>
-                <li>Light UX writing</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-        <div class="col-12 col-md-12 col-lg-4">
-          <article class="card card-soft h-100">
-            <div class="card-body">
-              <h6 class="text-uppercase text-muted">How I work</h6>
-              <ul class="mb-0">
-                <li>Detail‑oriented, big‑picture thinker</li>
-                <li>Systems &amp; structure</li>
-                <li>Calm under time pressure</li>
-                <li>Clear communicator</li>
-                <li>Collaborative &amp; kind</li>
-                <li>Always learning</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </div>      
-    </div>
-  </section>
+  sections.forEach((sec, i) => {
+    const mark = document.createElement('div');
+    mark.className = 'scrub-mark';
+    mark.dataset.target = sec.id;
+    const pct = (i / (sections.length - 1)) * 100;
+    mark.style.top = pct + '%';
+    mark.addEventListener('click', () => sec.scrollIntoView({behavior:'smooth'}));
 
-  <hr class="m-0">
+    const label = document.createElement('div');
+    label.className = 'scrub-label';
+    label.style.top = pct + '%';
+    label.textContent = sec.dataset.act || sec.id;
 
-  <!-- ================= TOOLS & SYSTEMS ================= -->
-  <section id="tools" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">Tools &amp; Systems</h2>
-      <p class="text-muted">
- A collection of tools I’ve worked with across design, content creation, project coordination, data, productivity, and business systems. 
-  These reflect the platforms I use daily to plan, create, organise, analyse, and deliver work efficiently.
-</p>
+    scrubMarks.appendChild(mark);
+    scrubMarks.appendChild(label);
+  });
 
-      <div class="tool-logos">
-        <img src="images/figma.png" alt="Figma">
-        <img src="images/html.png" alt="HTML">
-        <img src="images/python.png" alt="Python">
-        <img src="images/capcut.png" alt="CapCut">
-        <img src="images/canva.png" alt="Canva">
-        <img src="images/trello.png" alt="Trello">
-        <img src="images/monday.png" alt="Monday">
-        <img src="images/mailchimp.png" alt="Mailchimp">
-        <img src="images/ortto.png" alt="Ortto">
-        <img src="images/tableau.png" alt="Tableau">
-        <img src="images/google.png" alt="Google Workspace">
-        <img src="images/microsoft.png" alt="Microsoft Office">
-        <img src="images/pipedrive.png" alt="Pipedrive">
-      </div>
-    </div>
-  </section>
+  const marks = document.querySelectorAll('.scrub-mark');
+  const labels = document.querySelectorAll('.scrub-label');
 
-  <!-- ================= CONTACT ================= -->
-  <section id="contact" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold section-title">Let’s connect</h2>
-      <div class="row g-3">
-        <div class="col-12 col-md-8 col-lg-6">
-          <div class="p-3 p-md-4 rounded-3 border">
-            <p class="mb-2">Email</p>
-            <p class="fs-5">
-              <a class="link-accent" href="mailto:karenaritafong007@gmail.com">karenaritafong007@gmail.com</a>
-            </p>
-            <hr>
-            <p class="mb-2">Résumé</p>
-            <a class="btn btn-accent btn-sm" href="assets/Karen_Fong_Resume2026.pdf" target="_blank" rel="noopener">Download PDF</a>
-            <hr>
-            <p class="mb-2">LinkedIn</p>
-            <a class="link-accent" href="https://www.linkedin.com/in/fongkaren/" target="_blank" rel="noopener">linkedin.com/in/fongkaren</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100));
+    scrubFill.style.height = pct + '%';
 
-  <footer class="py-4 bg-white border-top">
-    <div class="container small text-muted d-flex flex-wrap gap-2 justify-content-between">
-      <span>© 2026 Karen Arita Finau Fong</span>
-      <span>Built with Bootstrap</span>
-    </div>
-  </footer>
+    let activeIdx = 0;
+    sections.forEach((sec, i) => {
+      if (scrollTop >= sec.offsetTop - window.innerHeight * 0.5) activeIdx = i;
+    });
+    marks.forEach((m,i) => m.classList.toggle('active', i === activeIdx));
+    labels.forEach((l,i) => l.classList.toggle('active', i === activeIdx));
+  }
+  document.addEventListener('scroll', onScroll);
+  window.addEventListener('resize', onScroll);
+  onScroll();
+</script>
 
-  <!-- Bootstrap JS (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Your JS -->
-  <script src="script.js"></script>
 </body>
-
 </html>
-
